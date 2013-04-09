@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title></title>
+<meta charset="utf-8" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){    
+    setTimeout(function(){        
+        $("#header").animate({ height: 'show' }, { duration: 500, queue: false });
+    }, 500);
+});
+</script>
+<link href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style type="text/css">
+*{margin:0;padding:0;}
+html, body{height:100%;}
+body{background:url(b.jpg) #cfc 0 100% repeat-x;}
+#holder{margin:0 auto;width:900px;min-height:100%;height:100%;}
+#spacer{height:10px;}
+#landing{width:100%;height:98%;background:#fff;border-radius:15px;-moz-border-radius:15px;}
+#header{display:none;height:200px;padding:30px}
+h1{text-align:center;font-size:34px;font-family:'Marck Script',cursive;}
+h2{text-align:center;font-size:28px;font-family:'Marck Script',cursive;}
+span.en{color:#9c0;}
+span.de{color:#f90;}
+span.ru{color:#c00;}
+div.hearts{width:100%;height:30px;background:url(hearts.gif) center no-repeat;margin:5px 0 10px;}
+</style>
+</head>
+<body>
+<div id="holder">
+    <div id="spacer">
+    </div>
+    <div id="landing">
+        <div id="header">
+            <h1><span class=ru>Dear</span> <span class=en>Liebe</span> <span class=de>Дорогие</span> <span class=ru>Kostya i Tanya,</span></h1>
+            
+            <div class="hearts"></div>
+            
+            <h2><span class=en>Happy wedding!</span> <span class=de>Glückliche Hochzeit!</span> <span class=ru>З Днем Весілля!</span></h1>
+            
+            <div class="hearts"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
