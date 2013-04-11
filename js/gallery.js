@@ -1,7 +1,6 @@
-﻿$(function () {    
-    "use strict";
+﻿$(function(){
     var CLIENTID = "00000000440EE21A", // client_id needed for the SkyDrive API
-        REDIRECT_URL = "http://kostya-tanya.com/", // redirect_url for the SkyDrive API 
+        REDIRECT_URL = "http://kostya-tanya.com/", // redirect_url for the SkyDrive API
         directoryName = "test", //directory in which we are going to search for photos
         photosArray = new Array(10), // 10 x n bidimensional array to reference every photo taken from SkyDrive (within tiles: 5 for front ones, 5 for back ones)
         currentPhotosArray = 0, // photosArray index where to add new incoming photos
@@ -22,24 +21,27 @@
         WL.init({
             client_id: CLIENTID,
             redirect_uri: REDIRECT_URL,
-            scope: "wl.signin",
+            scope: ["wl.signin", "wl.basic", "wl.photos", "wl.skydrive"],
             response_type: "token"
-        });      
+        });
     }
-   
+
 
     $('#logintext').click(function () {
         loginControl = document.getElementById("logintext");
-        if (loginControl.innerText === "Sign in") {           
-            WL.login({
-                scope: ["wl.signin", "wl.basic","wl.photos", "wl.skydrive"]
-            });
-            
-        }
-        else {
-            WL.logout();
-            
-        }
+        
+        //if (loginControl.innerText === "Sign in") {
+            //WL.login({
+            //    scope: ["wl.signin", "wl.basic", "wl.photos", "wl.skydrive"]
+            //});
+        
+        WL.login();
+        
+        //}
+        //else {
+        //    WL.logout();
+        //}
+        return false;
     });
 
     /**
@@ -133,15 +135,14 @@
         document.getElementById("logintext").innerText = "Sign Out";
         document.getElementById("mySign").className = "signout";
         if (!session.error) {
-            WL.api({
+            /* WL.api({
                 path: "me",
                 method: "GET"
-            });
+            }); */
             WL.api({ path: "/me/albums/", method: "GET" }).then(
                 getDirectory,
                function (response) {
-                   console.log("Could not access albums, status = " +
-                       JSON.stringify(response.error).replace(/,/g, ",\n"));
+                   console.log("Could not access albums, status = " + JSON.stringify(response.error).replace(/,/g, ",\n"));
                });
         }
         else {
@@ -155,7 +156,7 @@
         loginControl.innerText = "Sign in";
         document.getElementById("mySign").className = "signin";
         setTimeout(function () { window.location.href = 'index.html'; }, 1000);
-        
+
         clearInterval(checkNewPhotos);
     }
 
@@ -187,7 +188,7 @@
         }, function (responseFailed) {
             console.log("Error reading folder properties: " + responseFailed.error.message);
         });
-    }    
+    }
 
     /**
     * Converts a ISO8601 date string and returns a Date object
@@ -215,5 +216,5 @@
 
         // by using setUTC methods the date has already been converted to local time(?)
         return _date;
-    }    
+    }
 });
