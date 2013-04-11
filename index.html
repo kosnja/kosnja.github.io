@@ -1,86 +1,224 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-    <title>CascadiaJS SkyDrive-Powered Gallery / 2012</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" href="/css/MetroJs.css" type="text/css" />
-    <link rel="stylesheet" href="/css/style.css" type="text/css" media="screen" />
-    <script src="http://js.live.net/v5.0/wl.js" type="text/javascript"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
-    <script type="text/javascript" src="/js/MetroJs.js"></script>
-    <script type="text/javascript" src="/js/gallery.js"></script>
+<title></title>
+<meta charset="utf-8" />
+<script src="http://js.live.net/v5.0/wl.js"></script>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+$(function(){
+    var CLIENTID = "00000000440EE21A", // client_id needed for the SkyDrive API
+        REDIRECT_URL = "http://kostya-tanya.com/", // redirect_url for the SkyDrive API
+        directoryName = "test", //directory in which we are going to search for photos
+        photosArray = new Array(10), // 10 x n bidimensional array to reference every photo taken from SkyDrive (within tiles: 5 for front ones, 5 for back ones)
+        currentPhotosArray = 0, // photosArray index where to add new incoming photos
+        lastDate, // last date we look for new photos
+        fotosdirectory, // fotosdirectory id
+        loginControl;
+
+    init();
+
+    /**
+    * Initializes the SkyDrive API
+    **/
+    function init() {
+        WL.Event.subscribe("auth.login", onLogin);
+        WL.Event.subscribe("auth.logout", onLogout);
+        // imgsArray.push(document.getElementById("img1"));
+        // imgsArray.push(document.getElementById("img2"));
+        WL.init({
+            client_id: CLIENTID,
+            redirect_uri: REDIRECT_URL,
+            scope: ["wl.signin", "wl.basic", "wl.photos", "wl.skydrive"],
+            response_type: "token"
+        });
+        WL.login();
+    }
+
+    /**
+    * Gets all files images in full size and add the urls to the photosArray
+    **/
+    function getFiles(response) {
+        var items = response.data,
+            i;
+
+        // photosArray initialization
+        for ( i = 0; i < photosArray.length; i++) {
+            photosArray[i] =[];
+        }
+
+        // photosArray initial filling with full-size photos received from SkyDrive
+        for ( i = 0; i < items.length; i++) {
+            photosArray[i % 10].push({src: items[i].images[3].source});
+        }
+
+        // Current date in order to check for new photos in a future
+        lastDate = new Date();
+
+        console.log(photosArray);
+    }
+
+    /**
+    * Search for the directory and gets all photos
+    **/
+    function getDirectory(response) {
+        var items = response.data,
+            i;
+        for (i = 0; i < items.length; i++) {
+            if (items[i].name === directoryName) {
+                fotosdirectory = items[i].id;
+            }
+        }
+
+        WL.api({
+            path: fotosdirectory + "/files",
+            method: "GET"
+        }).then(
+            getFiles,
+            function (responseFailed) {
+                console.log("Error reading folder properties: " + responseFailed.error.message);
+            }
+        );
+    }
+
+    /**
+    * When we log, we gets all photos
+    **/
+    function onLogin(session) {
+        document.getElementById("logintext").innerText = "Sign Out";
+        document.getElementById("mySign").className = "signout";
+        if (!session.error) {
+            /* WL.api({
+                path: "me",
+                method: "GET"
+            }); */
+            WL.api({ path: "/me/albums/", method: "GET" }).then(
+                getDirectory,
+               function (response) {
+                   console.log("Could not access albums, status = " + JSON.stringify(response.error).replace(/,/g, ",\n"));
+               });
+        }
+        else {
+            console.log("Error signing in: " + session.error_description);
+        }
+        //Sets the chekNewPhotos every 30 seconds
+        setInterval(checkNewPhotos, 30000);
+    }
+
+    function onLogout(session) {
+        loginControl.innerText = "Sign in";
+        document.getElementById("mySign").className = "signin";
+        setTimeout(function () { window.location.href = 'index.html'; }, 1000);
+
+        clearInterval(checkNewPhotos);
+    }
+
+    /**
+    * Checks for new fotos in the directory
+    **/
+    function checkNewPhotos() {
+        WL.api({
+            path: fotosdirectory + "/files",
+            method: "GET"
+        }).then(function (response) {
+            var itemDate,
+            items = response.data,
+            i;
+
+            for ( i = 0; i < items.length; i++) {
+                itemDate = parseISO8601(items[i].updated_time);
+
+                if (itemDate >= lastDate) {
+                    photosArray[currentPhotosArray].push({src: items[i].images[3].source});
+
+                    if (++currentPhotosArray >= photosArray.length) {
+                        currentPhotosArray = 0;
+                    }
+                }
+            }
+
+            lastDate = new Date();
+        }, function (responseFailed) {
+            console.log("Error reading folder properties: " + responseFailed.error.message);
+        });
+    }
+
+    /**
+    * Converts a ISO8601 date string and returns a Date object
+    **/
+    function parseISO8601(str) {
+        // we assume str is a UTC date ending in 'Z'
+
+        var parts = str.split('T'),
+            dateParts = parts[0].split('-'),
+            timeParts = parts[1].split('Z'),
+            timeSubParts = timeParts[0].split(':'),
+            timeSecParts = timeSubParts[2].split('.'),
+            timeHours = Number(timeSubParts[0]),
+            _date = new Date();
+
+        _date.setUTCFullYear(Number(dateParts[0]));
+        _date.setUTCMonth(Number(dateParts[1]) - 1);
+        _date.setUTCDate(Number(dateParts[2]));
+        _date.setUTCHours(Number(timeHours));
+        _date.setUTCMinutes(Number(timeSubParts[1]));
+        _date.setUTCSeconds(Number(timeSecParts[0].split('+')[0]));
+        if (timeSecParts[1]) {
+            _date.setUTCMilliseconds(Number(timeSecParts[1]));
+        }
+
+        // by using setUTC methods the date has already been converted to local time(?)
+        return _date;
+    }
+});
+
+
+$(document).ready(function(){
+    setTimeout(function(){        
+        $("#header").animate({ height: 'show' }, { duration: 330, queue: false });
+    }, 1000);
+    read();
+});
+</script>
+<link href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+<style type="text/css">
+*{margin:0;padding:0;}
+html, body{height:100%;}
+body{background:url(b.jpg) #cfc 0 100% repeat-x;}
+#holder{margin:0 auto;width:900px;min-height:100%;height:100%;}
+#spacer{height:10px;}
+#landing{width:100%;height:98%;background:#fff;border-radius:15px;-moz-border-radius:15px;}
+#header{display:none;height:200px;padding:30px}
+h1{text-align:center;font-size:34px;font-family:'Marck Script',cursive;}
+h2{text-align:center;font-size:28px;font-family:'Marck Script',cursive;}
+span.en{color:#9c0;}
+span.de{color:#f90;}
+span.ru{color:#c00;}
+div.hearts{width:100%;height:30px;background:url(hearts.gif) center no-repeat;margin:5px 0 10px;}
+</style>
 </head>
-
 <body>
-
-    <div class="header">
-        <div class="headerCentered">
-            <img src="images/icon_skydrive.png" style="margin-top: 10px" /><span style="font-size: 1.5em">  Powered by the SkyDrive API 
-            </span>
-            <div id="mySign" class="signin">
-                <img src="images/icon_windows8.png" />
-                <a id="logintext" href="/">Sign in</a>
-            </div>
+<div id="holder">
+    <div id="spacer">
+    </div>
+    <div id="landing">
+        <div id="header">
+            <h1><span class=ru>Dear</span> <span class=en>Liebe</span> <span class=de>Дорогие</span> <span class=ru>Kostya i Tanya,</span></h1>
+            
+            <div class="hearts"></div>
+            
+            <h2><span class=en>Happy wedding!</span> <span class=de>Glückliche Hochzeit!</span> <span class=ru>З Днем Весілля!</span></h1>
+            
+            <div class="hearts"></div>
+            
+            <!--<form>
+                <input id="file" name="file" type="file" />
+                <button onclick="uploadFile()">Save file directly (calling WL.upload)</button>
+            </form>-->
+            
+            <div id="info"></div>
         </div>
     </div>
-
-    <div class="content-cascadia">
-        <div class="content-header-cascadia">
-        </div>
-        <div class="content-photos">
-            <div id="tile1" class="live-tile bigPhoto" data-direction="horizontal" data-delay="15000" data-initdelay="5000">
-                <!-- adding the 'full' class to an 'img' or 'a' tag causes it to fill the entire tile -->
-                <div>
-                    <img class="full" src="images/tiles-bgs/big-photo.jpg" />
-                </div>
-                <div>
-                    <img class="full" src="images/tiles-bgs/big-photo.jpg" />
-                </div>
-            </div>
-            <div id="tile2" class="live-tile right-head-photo" data-direction="horizontal" data-delay="10000" data-initdelay="5000">
-                <div>
-                    <img class="full" src="images/tiles-bgs/right-head-photo.jpg" />
-                </div>
-                <div>
-                    <img class="full" src="images/tiles-bgs/right-head-photo.jpg" />
-
-                </div>
-            </div>
-            <div id="tile3" class="live-tile right-second-photo" data-delay="12000" data-initdelay="4000">
-                <!-- adding the 'full' class to an 'img' or 'a' tag causes it to fill the entire tile -->
-                <div>
-                    <img class="full" src="images/tiles-bgs/right-second-photo.jpg" />
-                </div>
-                <div>
-                    <img class="full" src="images/tiles-bgs/right-second-photo.jpg" />
-                </div>
-            </div>
-            <div id="tile4" class="live-tile left-first-photo" data-direction="horizontal" data-delay="9000" data-initdelay="5000">
-                <!-- adding the 'full' class to an 'img' or 'a' tag causes it to fill the entire tile -->
-                <div>
-                    <img class="full" src="images/tiles-bgs/left-first-photo.jpg" />
-                </div>
-                <div>
-                    <img class="full" src="images/tiles-bgs/left-first-photo.jpg" />
-                </div>
-            </div>
-            <div id="tile5" class="live-tile left-second-photo" data-delay="16000" data-initdelay="5000">
-                <div>
-                    <img class="full" src="images/tiles-bgs/left-second-photo.jpg" />
-                </div>
-                <div>
-                    <img class="full" src="images/tiles-bgs/left-second-photo.jpg" />
-
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-
-    <div class="foot">
-        Designed by Plain Concepts
-    </div>
-
+</div>
 </body>
 </html>
