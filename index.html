@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ua">
 <head>
-<title>Kostya & Tanya: УРА! УРА! УРА! </title>
+<title>Kostya & Tanya: УРА!!!!!!!!11111</title>
 <meta charset="utf-8" />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -20,12 +20,13 @@ body{background-image:url(b.jpg), url(birds.jpg);background-position:0 100%, 0 0
 #spacer{height:10px;}
 #landing{width:100%;height:98%;background:#fff;border-radius:15px;-moz-border-radius:15px;}
 #header{display:none;height:200px;padding:30px}
-h1{text-align:center;font-size:34px;font-family:'Marck Script',cursive;}
-h2{text-align:center;font-size:28px;font-family:'Marck Script',cursive;}
+h1{text-align:center;font-size:3em;font-family:'Marck Script',cursive;}
+h2{text-align:center;font-size:2em;font-family:'Marck Script',cursive;}
 span.en{color:#9c0;}
-span.de{color:#f90;}
+span.de{color:#039;}
 span.ru{color:#c00;}
 div.hearts{width:100%;height:30px;background:url(hearts.gif) center no-repeat;margin:5px 0 10px;}
+.myfilepicker{background:#039;font-size:1.5em;color:#fff;border-radius:5px;-moz-border-radius:5px;}
 </style>
 </head>
 <body>
@@ -44,17 +45,26 @@ div.hearts{width:100%;height:30px;background:url(hearts.gif) center no-repeat;ma
             
             
             <form>
-                <input type="filepicker" name="myfilepicker" id="myfilepicker" data-fp-apikey="A0K1AsttMTZmsX1l7lJIaz" data-fp-mimetypes="*/*" data-fp-container="modal" data-fp-multiple="true" onchange="out='';for(var i=0;i<event.fpfiles.length;i++){out+=event.fpfiles[i].url;out+=' '};alert(out)" style="background:#cfc;font-size:1.5em;color:#fff;border-radius:5px;-moz-border-radius:5px;">
+                <!--<input type="filepicker" name="myfilepicker" data-fp-mimetypes="*/*" data-fp-container="modal" data-fp-multiple="true" data-fp-button-class="myfilepicker" data-fp-button-text="Add File" onchange="window.out=[];for(var i=0;i<event.fpfiles.length;i++){out.push(event.fpfiles[i].url);};">-->
             </form>
             
             <div id="info"></div>
         </div>
     </div>
 </div>
-<script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+<script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
 <script type="text/javascript">
 filepicker.setKey('A0K1AsttMTZmsX1l7lJIaz');
-filepicker.constructWidget($('#myfilepicker')); 
+/*
+filepicker.pick({},
+  function(FPFile){
+    console.log(JSON.stringify(FPFile));
+  },
+  function(FPError){
+    console.log(FPError.toString());
+  }
+);
+*/
 </script>
 </body>
 </html>
