@@ -53,7 +53,7 @@ $(document).ready(function(){
     var storefile = {url: 'https://www.filepicker.io/api/file/KxUEc95PS4uKARrdKvj4'};
     filepicker.read(storefile, {asText: true}, function(data){
         if (data.indexOf('https://www.filepicker.io/api/file/') == -1){
-            console.log('No photos yet');
+            //console.log('No photos yet');
             return;
         }
         window.urls = data.trim().split('\n');
