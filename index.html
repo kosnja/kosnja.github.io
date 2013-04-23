@@ -30,7 +30,7 @@ p{color:#039;font-size:1.7em;text-align:center;margin:20px 0;}
 div.close{background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:-14px;right:-14px;cursor:pointer;}
 div.left{float:left}
 div.clear{clear:both}
-div.img{cursor:pointer;border:1px solid #039;padding:5px;margin:4px;background:#fdfdfd;}
+div.img{cursor:pointer;border:1px solid #039;padding:4px;margin:3px;background:#fdfdfd;}
 div.img:hover{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
 div.img:focus{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
 #hi{position:fixed;right:0;bottom:0;width:30px;height:100px;background:url(hi.gif) no-repeat;}
@@ -114,8 +114,8 @@ $(document).ready(function(){
     
     function genblock(n, s){
         var o = '';
-        if (window.c % 5 == 0) o += '<div class=clear></div>';
-        o += '<div class="img left"><img src="' + s + '/convert?w=150&format=jpg" alt=""></div>';
+        if (window.c % 6 == 0) o += '<div class=clear></div>';
+        o += '<div class="img left"><img src="' + s + '/convert?w=125&format=jpg" alt=""></div>';
         window.c += 1
         return o;
     }
