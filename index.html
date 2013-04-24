@@ -35,14 +35,6 @@ $(document).ready(function(){
     
     update_local_state();
     
-    var output = '';
-    $.each(window.urls, function(n, item){
-        output += genblock(n, item);
-    });
-    $('#grid').append(output);
-    $('div.img a').lightBox();
-    
-    
     
     $('div.password-init').click(function(){
         $('html, body').animate({scrollTop: 0});
@@ -77,9 +69,10 @@ $(document).ready(function(){
                 });
                 $('#grid').append(output);
                 $('div.img a').lightBox();
+                
                 var respcollect = window.urls.join('\n') + '\n';
                 
-                filepicker.write(window.storefile, respcollect, function(FPFile){
+                filepicker.write(window.storefile, respcollect, {base64decode: false}, function(FPFile){
                     status("Gut! Alles in Ordnung");
                 }, function(FPError){
                     status('Achtung! ' + filepicker.error_map[FPError.code].message);
@@ -98,12 +91,21 @@ $(document).ready(function(){
     }
     
     function update_local_state(){
-        filepicker.read(window.storefile, {asText: true}, function(data){
+        filepicker.read(window.storefile, {asText: true, base64encode: false}, function(data){
             if (data.indexOf('https://www.filepicker.io/api/file/') == -1){
                 status('No photos yet');
                 return;
             }
             window.urls = window.urls.concat(data.trim().split('\n')).unique();
+            
+            if (!window.c){ // .once()
+                var output = '';
+                $.each(window.urls, function(n, item){
+                    output += genblock(n, item);
+                });
+                $('#grid').append(output);
+                $('div.img a').lightBox();
+            }
         },
         function(FPError){
             status('Achtung! ' + filepicker.error_map[FPError.code].message);
