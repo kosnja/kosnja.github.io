@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ua">
 <head>
-<title>Kostya & Tanya: УРА!!!!!!!!11111</title>
+<title>Kostya & Tanya &mdash; Весілля &mdash; Wedding &mdash; Hochzeit</title>
 <meta charset="utf-8" />
 <link href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
 <style type="text/css">
 *{margin:0;padding:0;}
 html, body{width:100%;height:100%;}
-body{width:100%;height:100%;background:url(trees.jpg) 0 100% repeat-x fixed #cfc;}
-#bglayer{width:100%;height:100%;background:url(birds.jpg) 0 0 repeat-x fixed;}
+body{width:100%;height:100%;background:url(tree.jpg) 0 100% repeat-x fixed #cfc;}
+#bglayer{width:100%;height:100%;background:url(sky.jpg) 0 0 repeat-x fixed;}
 #holder{margin:0 auto;width:900px;}
 div.vspacer{height:10px;}
 #landing{width:100%;background:#fff;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;}
-#header{height:140px;padd1ing:30px}
+#header{height:110px;padd1ing:30px}
 h1, h2, p{font-family:'Marck Script',cursive;}
 #header h1{text-align:center;font-size:3em;}
 #header h2{text-align:center;font-size:2em;}
-span.en{color:#9c0;}
-span.de{color:#039;}
+span.en{color:#fc0;}
+span.de{color:#09c;}
 span.ru{color:#c00;}
-div.hearts{width:100%;height:30px;background:url(rings.jpg) center no-repeat;margin:5px 0 10px;}
-div.login{font-family:'Marck Script',cursive;width:240px;height:30px;margin:10px auto;text-align:center;background:#039;font-size:1.2em;color:#fff;box-shadow:inset 0 2px 2px rgba(255,255,255,.22), inset 0 -2px 2px rgba(0,0,0,.17), inset 0 20px 10px rgba(255,255,255,.12), 0 0 2px 1px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.2);cursor:pointer;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
-div.login:hover{background:#dfdfdf;color:#039;}
-#content{padding:20px;}
+div.login{font-family:'Marck Script',cursive;width:240px;height:30px;margin:15px auto;text-align:center;background:#09c;font-size:1.2em;color:#fff;box-shadow:inset 0 2px 2px rgba(255,255,255,.22), inset 0 -2px 2px rgba(0,0,0,.17), inset 0 20px 10px rgba(255,255,255,.12), 0 0 2px 1px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.2);cursor:pointer;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
+div.login:hover{background:#dfdfdf;color:#09c;}
+#content{padding:10px 20px;}
 #password{border:2px solid #000;width:240px;}
-.myfilepicker{background:#039;font-size:1.5em;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
-#modalbox{display:none;z-index:1000;position:absolute;left:25%;top:25%;width:50%;height:20%;text-align:center;background:#fff;border:2px solid #666;padding:30px 0;-webkit-box-shadow:-3px 3px 3px 3px #999;-moz-box-shadow:-3px 3px 3px 3px #999;box-shadow:-3px 3px 3px 3px #999;}
-p{color:#039;font-size:1.7em;text-align:center;margin:20px 0;}
+.myfilepicker{background:#09c;font-size:1.5em;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+#modalbox{display:none;z-index:1000;position:absolute;left:25%;top:25%;width:50%;height:200px;text-align:center;background:#fff;border:2px solid #666;padding:30px 0;-webkit-box-shadow:-3px 3px 3px 3px #999;-moz-box-shadow:-3px 3px 3px 3px #999;box-shadow:-3px 3px 3px 3px #999;}
+p{color:#09c;font-size:1.7em;text-align:center;margin:20px 0;}
 div.close{background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:-14px;right:-14px;cursor:pointer;}
 div.left{float:left}
 div.clear{clear:both}
-div.img{cursor:pointer;border:1px solid #039;padding:5px;margin:5px;background:#fdfdfd;}
+div.img{cursor:pointer;border:1px solid #09c;padding:5px;margin:5px;background:#fdfdfd;}
 div.img:hover{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
 div.img:focus{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
-#hi{position:fixed;right:0;bottom:0;width:30px;height:100px;background:url(hi.gif) no-repeat;}
+#hi{position:fixed;right:0;bottom:0;width:9px;height:71px;background:url(hi.gif) no-repeat;}
 </style>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript" src="lightbox.jquery.js"></script>
 <script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
 <!--<script type="text/javascript" src="https://api.filepicker.io/v1/filepicker_debug.js"></script>-->
 <script type="text/javascript">
@@ -44,9 +44,6 @@ if (!String.prototype.trim){ String.prototype.trim=function(){return this.replac
 var urls = [];
 var c = 0;
 $(document).ready(function(){
-    //setTimeout(function(){        
-    //    $("#header").animate({ height: 'show' }, { duration: 330, queue: false });
-    //}, 1000);
     
     filepicker.setKey('A0K1AsttMTZmsX1l7lJIaz');
     
@@ -67,6 +64,16 @@ $(document).ready(function(){
         //console.log(FPError);
         //alert(FPError.toString());
     });
+    
+    $('div.img a').lightBox({
+    overlayBgColor: '#fff',
+    overlayOpacity: 0.4,
+    imageLoading: 'loading.gif',
+    imageBtnClose: 'close.png',
+    imageBtnPrev: 'prev.gif',
+    imageBtnNext: 'next.gif',
+    imageBlank: 'blank.gif'
+    })
     
     $('div.password-init').click(function(){
         $('html, body').animate({scrollTop: 0});
@@ -115,7 +122,7 @@ $(document).ready(function(){
     function genblock(n, s){
         var o = '';
         if (window.c % 5 == 0) o += '<div class=clear></div>';
-        o += '<div class="img left"><img src="' + s + '/convert?w=150&format=jpg" alt=""></div>';
+        o += '<div class="img left"><a href="' + s + '"><img src="' + s + '/convert?w=150&format=jpg" alt=""></a></div>';
         window.c += 1
         return o;
     }
@@ -144,8 +151,7 @@ $(document).ready(function(){
         <div id="header">
             
             <h1><span class=ru>Дорогi</span> <span class=en>Dear</span> <span class=de>Liebe</span> <span class=ru>Kostya i Tanya,</span></h1>            
-            <h2><span class=en>Happy wedding!</span> <span class=de>Glückliche Hochzeit!</span> <span class=ru>З Днем Весілля!</span></h1>
-            <div class="hearts"></div>
+            <h2><span class=de>З Днем Весілля!</span> <span class=ru>Happy wedding!</span> <span class=en>Glückliche Hochzeit!</span></h1>
             
         </div>
         
@@ -157,13 +163,13 @@ $(document).ready(function(){
             <div class="clear"></div>
             
             <div class="login password-init">Додати фото &mdash; Add photo</div>
-        
-        <p><span class=de>Написати</span> <span class=ru>хороших</span> <span class=en>побажань</span> &mdash; <span class=de>Write</span> <span class=ru>nice</span> <span class=en>wishes</span></p>
+            
+        <p><span class=de>Написати</span> <span class=ru>хороших</span> <span class=en>побажань</span> &mdash; <span class=de>Write</span> <span class=ru>nice</span> <span class=en>wishes:</span></p>
         
         <div id="disqus_thread"></div>
         <script type="text/javascript">
         var disqus_shortname = 'kostya-tanya';
-        var disqus_developer = 1;
+        var disqus_identifier = 'landing';
         (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
