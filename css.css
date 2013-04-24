@@ -18,19 +18,21 @@ div.login:hover{background:#dfdfdf;color:#09c;}
 #password{border:2px solid #000;width:240px;}
 .myfilepicker{background:#09c;font-size:1.5em;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
 #modalbox{display:none;z-index:1000;position:absolute;left:25%;top:25%;width:50%;height:200px;text-align:center;background:#fff;border:2px solid #666;padding:30px 0;-webkit-box-shadow:-3px 3px 3px 3px #999;-moz-box-shadow:-3px 3px 3px 3px #999;box-shadow:-3px 3px 3px 3px #999;}
-#status{display:none;z-index:1001;position:absolute;right:2px;top:2px;width:200px;height:50px;text-align:center;background:#fc0;font-size:0.7em;}
+#status{display:none;z-index:1001;position:absolute;right:2px;top:2px;width:200px;text-align:center;background:#fc0;font-size:0.9em;padding:15px;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
 p{color:#09c;font-size:1.7em;text-align:center;margin:20px 0;}
-div.close{background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:-14px;right:-14px;cursor:pointer;}
+div.cross{z-index:1003;background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:2px;right:2px;cursor:pointer;}
 div.left{float:left}
 div.clear{clear:both}
 div.img{cursor:pointer;border:1px solid #09c;padding:5px;margin:5px;background:#fdfdfd url(loading.gif) no-repeat center center;min-height:50px;min-width:150px;}
 div.img:hover{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
 div.img:focus{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
+div.img a{border:0;}
 #hi{position:fixed;right:0;bottom:0;width:9px;height:71px;background:url(hi.gif) no-repeat;}
 
 /**
 * jQuery lightBox plugin
 */
+
 #jquery-overlay{
 position:absolute;
 top:0;
@@ -92,14 +94,12 @@ right:0;
 float:right;
 }
 #lightbox-container-image-data-box{
-font-family:'Marck Script', cursive;
-font-size:1.2em;
-background-color:#fff;
-margin:10px auto;
-line-height:1.4em;
+font-size:1.3em;
+margin:0 auto;
+line-height:2em;
 overflow:auto;
 width:100%;
-padding:0 10px 0;
+padding:0 10px;
 }
 #lightbox-container-image-data{
 padding:0 10px;
@@ -110,12 +110,11 @@ width:70%;
 float:left;
 text-align:left;
 }
-#lightbox-image-details-caption{ color:#09c; letter-spacing:1px; font-size:1.2em; font-weight:bold; }
+#lightbox-image-details-caption{ color:#fc0; letter-spacing:1px; font-size:1.3em; font-weight:bold; }
 #lightbox-image-details-currentNumber{
-color:#09c; font-size:1.2em;
+color:#fc0; font-size:1.3em;
 display:block;
 clear:left;
-padding-bottom:2.0em;
 }
 #lightbox-secNav-btnClose{
 width:66px;
