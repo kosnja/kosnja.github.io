@@ -60,20 +60,17 @@ $(document).ready(function(){
             
             filepicker.pickMultiple({mimetype: 'image/*', container: 'modal'},
             function(FPFiles){
-                update_local_state();
-                
-                var output = '';
+            
                 $.each(FPFiles, function(n, item){
                     window.urls.push(item.url);
-                    output += genblock(n, item.url);
                 });
-                $('#grid').append(output);
-                $('div.img a').lightBox();
+                
+                update_local_state();
                 
                 var respcollect = window.urls.join('\n') + '\n';
                 
                 filepicker.write(window.storefile, respcollect, {base64decode: false}, function(FPFile){
-                    status("Gut! Alles in Ordnung");
+                    status("Saved successfully");
                 }, function(FPError){
                     status('Achtung! ' + filepicker.error_map[FPError.code].message);
                 }, function(progress){});
@@ -98,14 +95,12 @@ $(document).ready(function(){
             }
             window.urls = window.urls.concat(data.trim().split('\n')).unique();
             
-            if (!window.c){ // .once()
-                var output = '';
-                $.each(window.urls, function(n, item){
-                    output += genblock(n, item);
-                });
-                $('#grid').append(output);
-                $('div.img a').lightBox();
-            }
+            var output = '';
+            $.each(window.urls, function(n, item){
+                output += genblock(n, item);
+            });
+            $('#grid').empty().append(output);
+            $('div.img a').lightBox();
         },
         function(FPError){
             status('Achtung! ' + filepicker.error_map[FPError.code].message);
