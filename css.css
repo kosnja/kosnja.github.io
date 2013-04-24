@@ -26,7 +26,7 @@ div.clear{clear:both}
 div.img{cursor:pointer;border:1px solid #09c;padding:5px;margin:5px;background:#fdfdfd url(loading.gif) no-repeat center center;min-height:50px;min-width:150px;}
 div.img:hover{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
 div.img:focus{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
-div.img a{border:0;}
+img, div.img a{border-width:0;}
 #hi{position:fixed;right:0;bottom:0;width:9px;height:71px;background:url(hi.gif) no-repeat;}
 
 /**
