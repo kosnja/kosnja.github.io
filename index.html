@@ -1,39 +1,10 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ua">
 <head>
-<title>Kostya & Tanya &mdash; Весілля &mdash; Wedding &mdash; Hochzeit</title>
+<title>Kostya & Tanya &mdash; Весілля! Wedding! Hochzeit!</title>
 <meta charset="utf-8" />
 <link href='http://fonts.googleapis.com/css?family=Marck+Script&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-<style type="text/css">
-*{margin:0;padding:0;}
-html, body{width:100%;height:100%;}
-body{width:100%;height:100%;background:url(tree.jpg) 0 100% repeat-x fixed #cfc;}
-#bglayer{width:100%;height:100%;background:url(sky.jpg) 0 0 repeat-x fixed;}
-#holder{margin:0 auto;width:900px;}
-div.vspacer{height:10px;}
-#landing{width:100%;background:#fff;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;}
-#header{height:110px;padd1ing:30px}
-h1, h2, p{font-family:'Marck Script',cursive;}
-#header h1{text-align:center;font-size:3em;}
-#header h2{text-align:center;font-size:2em;}
-span.en{color:#fc0;}
-span.de{color:#09c;}
-span.ru{color:#c00;}
-div.login{font-family:'Marck Script',cursive;width:240px;height:30px;margin:15px auto;text-align:center;background:#09c;font-size:1.2em;color:#fff;box-shadow:inset 0 2px 2px rgba(255,255,255,.22), inset 0 -2px 2px rgba(0,0,0,.17), inset 0 20px 10px rgba(255,255,255,.12), 0 0 2px 1px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.2);cursor:pointer;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
-div.login:hover{background:#dfdfdf;color:#09c;}
-#content{padding:10px 20px;}
-#password{border:2px solid #000;width:240px;}
-.myfilepicker{background:#09c;font-size:1.5em;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
-#modalbox{display:none;z-index:1000;position:absolute;left:25%;top:25%;width:50%;height:200px;text-align:center;background:#fff;border:2px solid #666;padding:30px 0;-webkit-box-shadow:-3px 3px 3px 3px #999;-moz-box-shadow:-3px 3px 3px 3px #999;box-shadow:-3px 3px 3px 3px #999;}
-p{color:#09c;font-size:1.7em;text-align:center;margin:20px 0;}
-div.close{background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:-14px;right:-14px;cursor:pointer;}
-div.left{float:left}
-div.clear{clear:both}
-div.img{cursor:pointer;border:1px solid #09c;padding:5px;margin:5px;background:#fdfdfd;}
-div.img:hover{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
-div.img:focus{-moz-transform: rotate(2deg);-o-transform: rotate(2deg);-webkit-transform: rotate(2deg);}
-#hi{position:fixed;right:0;bottom:0;width:9px;height:71px;background:url(hi.gif) no-repeat;}
-</style>
+<link href='css.css' rel='stylesheet' type='text/css'>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript" src="lightbox.jquery.js"></script>
 <script type="text/javascript" src="http://api.filepicker.io/v1/filepicker.js"></script>
@@ -49,7 +20,7 @@ $(document).ready(function(){
     var storefile = {url: 'https://www.filepicker.io/api/file/KxUEc95PS4uKARrdKvj4'};
     filepicker.read(storefile, {asText: true}, function(data){
         if (data.indexOf('https://www.filepicker.io/api/file/') == -1){
-            //console.log('No photos yet');
+            status('No photos yet');
             return;
         }
         window.urls = data.trim().split('\n');
@@ -58,21 +29,18 @@ $(document).ready(function(){
             output += genblock(n, item);
         });
         $('#grid').append(output);
+        $('div.img a').lightBox({
+            overlayBgColor: '#fff',
+            overlayOpacity: 0.8,
+            imageLoading: 'loading.gif',
+            imageBtnPrev: 'prev.gif',
+            imageBtnNext: 'next.gif',
+            imageBlank: 'blank.gif'
+        });
     },
     function(FPError){
-        //console.log(FPError);
-        //alert(FPError.toString());
+        status(FPError.toString());
     });
-    
-    $('div.img a').lightBox({
-        overlayBgColor: '#fff',
-        overlayOpacity: 0.4,
-        imageLoading: 'loading.gif',
-        imageBtnClose: 'close.png',
-        imageBtnPrev: 'prev.gif',
-        imageBtnNext: 'next.gif',
-        imageBlank: 'blank.gif'
-    })
     
     $('div.password-init').click(function(){
         $('html, body').animate({scrollTop: 0});
@@ -98,17 +66,24 @@ $(document).ready(function(){
                     output += genblock(n, item.url);
                 });
                 $('#grid').append(output);
+                $('div.img a').lightBox({
+                    overlayBgColor: '#fff',
+                    overlayOpacity: 0.9,
+                    imageLoading: 'loading.gif',
+                    imageBtnClose: 'close.png',
+                    imageBtnPrev: 'prev.gif',
+                    imageBtnNext: 'next.gif',
+                    imageBlank: 'blank.gif'
+                });
                 respcollect = respcollect.concat(window.urls).join('\n') + '\n';
                 filepicker.write(storefile, respcollect, function(FPFile){
-                    console.log("Write successful:", FPFile.filename);
+                    status("Saved successfully");
                 }, function(FPError){
-                    console.log(FPError);
-                    //alert(FPError.toString());
+                    status(FPError.toString());
                 }, function(progress){});
             },
             function(FPError){
-                console.log(FPError);
-                //alert(FPError.toString());
+                status(FPError.toString());
             });
             
         } else $('#password').css('border-color', '#f00');
@@ -119,13 +94,23 @@ $(document).ready(function(){
     function genblock(n, s){
         var o = '';
         if (window.c % 5 == 0) o += '<div class=clear></div>';
-        o += '<div class="img left"><a href="' + s + '"><img src="' + s + '/convert?w=150&format=jpg" alt=""></a></div>';
+        o += '<div class="img left"><a href="' + s + '/convert?w=' + (document.body.clientWidth-400) + '&format=jpg&fit=max"><img src="' + s + '/convert?w=150&format=jpg" /></a></div>';
         window.c += 1
         return o;
     }
     
+    function status(msg){
+        $('#status').empty().append(msg).show();
+        setTimeout(function(){ $('#status').hide() }, 2000);
+    }
+    
     $('div.password-go').click(userlogin);
     $('#password-go').submit(userlogin);
+    
+    // ESC KEY
+    $(window).keypress(function(e){
+        if (e.keyCode == 27){ $('#modalbox').hide(); }
+    });
 });
 </script>
 </head>
@@ -138,6 +123,8 @@ $(document).ready(function(){
 <div class="login password-go">Хлоп &rarr;</div>
 <div class="close"></div>
 </div>
+
+<div id="status"></div>
 
 <div id="bglayer">
 <div id="holder">
@@ -156,7 +143,8 @@ $(document).ready(function(){
             
             <div class="login password-init">Додати фото &mdash; Add photo</div>
             
-            <div id="grid"></div>            
+            <div id="grid"></div>
+            
             <div class="clear"></div>
             
             <div class="login password-init">Додати фото &mdash; Add photo</div>

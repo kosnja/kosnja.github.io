@@ -1,0 +1,124 @@
+*{margin:0;padding:0;}
+html, body{width:100%;height:100%;}
+body{width:100%;height:100%;background:url(tree.jpg) 0 100% repeat-x fixed #cfc;}
+#bglayer{width:100%;height:100%;background:url(sky.jpg) 0 0 repeat-x fixed;}
+#holder{margin:0 auto;width:900px;}
+div.vspacer{height:10px;}
+#landing{width:100%;background:#fff;-webkit-border-radius:15px;-moz-border-radius:15px;border-radius:15px;}
+#header{height:110px;padd1ing:30px}
+h1, h2, p{font-family:'Marck Script',cursive;}
+#header h1{text-align:center;font-size:3em;}
+#header h2{text-align:center;font-size:2em;}
+span.en{color:#fc0;}
+span.de{color:#09c;}
+span.ru{color:#c00;}
+div.login{font-family:'Marck Script',cursive;width:240px;height:30px;margin:15px auto;text-align:center;background:#09c;font-size:1.2em;color:#fff;box-shadow:inset 0 2px 2px rgba(255,255,255,.22), inset 0 -2px 2px rgba(0,0,0,.17), inset 0 20px 10px rgba(255,255,255,.12), 0 0 2px 1px rgba(0,0,0,.1), 0 2px 2px rgba(0,0,0,.2);cursor:pointer;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;}
+div.login:hover{background:#dfdfdf;color:#09c;}
+#content{padding:10px 20px;}
+#password{border:2px solid #000;width:240px;}
+.myfilepicker{background:#09c;font-size:1.5em;color:#fff;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+#modalbox{display:none;z-index:1000;position:absolute;left:25%;top:25%;width:50%;height:200px;text-align:center;background:#fff;border:2px solid #666;padding:30px 0;-webkit-box-shadow:-3px 3px 3px 3px #999;-moz-box-shadow:-3px 3px 3px 3px #999;box-shadow:-3px 3px 3px 3px #999;}
+#status{display:none;z-index:1001;position:absolute;right:2px;top:2px;width:200px;height:50px;text-align:center;background:#fc0;font-size:0.7em;}
+p{color:#09c;font-size:1.7em;text-align:center;margin:20px 0;}
+div.close{background:url(close.png) no-repeat left top;height:28px;width:30px;position:absolute;top:-14px;right:-14px;cursor:pointer;}
+div.left{float:left}
+div.clear{clear:both}
+div.img{cursor:pointer;border:1px solid #09c;padding:5px;margin:5px;background:#fdfdfd url(loading.gif) no-repeat center center;min-height:50px;min-width:150px;}
+div.img:hover{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
+div.img:focus{-moz-transform:rotate(2deg);-o-transform:rotate(2deg);-webkit-transform:rotate(2deg);}
+#hi{position:fixed;right:0;bottom:0;width:9px;height:71px;background:url(hi.gif) no-repeat;}
+
+/**
+* jQuery lightBox plugin
+*/
+#jquery-overlay{
+position:absolute;
+top:0;
+left:0;
+z-index:90;
+width:100%;
+height:500px;
+}
+#jquery-lightbox{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+z-index:100;
+text-align:center;
+line-height:0;
+}
+#jquery-lightbox a img{ border:none; }
+#lightbox-container-image-box{
+border:1px solid #09c;
+position:relative;
+background-color:#fff;
+width:250px;
+height:250px;
+margin:0 auto;
+}
+#lightbox-container-image{ padding:10px; }
+#lightbox-loading{
+position:absolute;
+top:40%;
+left:0%;
+height:25%;
+width:100%;
+text-align:center;
+line-height:0;
+}
+#lightbox-nav{
+position:absolute;
+top:0;
+left:0;
+height:100%;
+width:100%;
+z-index:10;
+}
+#lightbox-container-image-box > #lightbox-nav{ left:0; }
+#lightbox-nav a{ outline:none;}
+#lightbox-nav-btnPrev, #lightbox-nav-btnNext{
+width:49%;
+height:100%;
+zoom:1;
+display:block;
+}
+#lightbox-nav-btnPrev{
+left:0;
+float:left;
+}
+#lightbox-nav-btnNext{
+right:0;
+float:right;
+}
+#lightbox-container-image-data-box{
+font-family:'Marck Script', cursive;
+font-size:1.2em;
+background-color:#fff;
+margin:10px auto;
+line-height:1.4em;
+overflow:auto;
+width:100%;
+padding:0 10px 0;
+}
+#lightbox-container-image-data{
+padding:0 10px;
+color:#fff;
+}
+#lightbox-container-image-data #lightbox-image-details{
+width:70%;
+float:left;
+text-align:left;
+}
+#lightbox-image-details-caption{ color:#09c; letter-spacing:1px; font-size:1.2em; font-weight:bold; }
+#lightbox-image-details-currentNumber{
+color:#09c; font-size:1.2em;
+display:block;
+clear:left;
+padding-bottom:2.0em;
+}
+#lightbox-secNav-btnClose{
+width:66px;
+float:right;
+padding-bottom:0.7em;
+}
