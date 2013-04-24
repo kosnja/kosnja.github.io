@@ -25,7 +25,6 @@ Array.prototype.unique = function(){
 }
 
 window.urls = [];
-window.c = 0;
 window.storefile = {url: 'https://www.filepicker.io/api/file/xVeMm29PQGGA9P9ezcH4'}; // store database file as currently FP doesn't allow listing
 filepicker.setKey('A0K1AsttMTZmsX1l7lJIaz');
 filepicker.debug = false;
@@ -109,9 +108,8 @@ $(document).ready(function(){
     
     function genblock(n, s){
         var o = '';
-        if (window.c % 5 == 0) o += '<div class=clear></div>';
+        if (n % 5 == 0) o += '<div class=clear></div>';
         o += '<div class="img left"><a href="' + s + '/convert?w=' + (document.body.clientWidth-400) + '&format=jpg&fit=max"><img src="' + s + '/convert?w=150&format=jpg" /></a></div>';
-        window.c += 1
         return o;
     }
     
