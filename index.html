@@ -77,7 +77,7 @@ $(document).ready(function(){
     $('div.password-init').click(function(){
         $('html, body').animate({scrollTop: 0});
         $('#modalbox').show();
-        $('#password').css('border-color', '#000');
+        $('#password').css('border-color', '#000').focus();
     });
     
     $('div.close').click(function(){
@@ -99,7 +99,6 @@ $(document).ready(function(){
                 });
                 $('#grid').append(output);
                 respcollect = respcollect.concat(window.urls).join('\n') + '\n';
-                respcollect = '';
                 filepicker.write(storefile, respcollect, function(FPFile){
                     console.log("Write successful:", FPFile.filename);
                 }, function(FPError){
