@@ -50,8 +50,7 @@ $(document).ready(function(){
     
     $('#password-go').submit(userlogin);
 
-    $(window).keypress(function(e){
-        if (!e && event) e = event;
+    $(document).keyup(function(e){
         if (e.keyCode == 27){ $('#modalbox').hide(); }
     });
     
