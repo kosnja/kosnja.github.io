@@ -26,7 +26,7 @@ Array.prototype.unique = function(){
 }
 
 window.urls = [];
-window.storefile = {url: 'https://www.filepicker.io/api/file/xVeMm29PQGGA9P9ezcH4'}; // store database file as currently FP doesn't allow listing
+window.storefile = {url: 'https://www.filepicker.io/api/file/nDpXVfs2Qp6dcskh23Aw'}; // VERY IMPORTANT!!! store database file as currently FP doesn't allow listing
 filepicker.setKey('A0K1AsttMTZmsX1l7lJIaz');
 filepicker.debug = false;
 
@@ -51,6 +51,7 @@ $(document).ready(function(){
     $('#password-go').submit(userlogin);
 
     $(window).keypress(function(e){
+        if (!e && event) e = event;
         if (e.keyCode == 27){ $('#modalbox').hide(); }
     });
     
@@ -72,7 +73,7 @@ $(document).ready(function(){
                 filepicker.write(window.storefile, respcollect, {base64decode: false}, function(FPFile){
                     status("Saved successfully");
                 }, function(FPError){
-                    status('Achtung! ' + filepicker.error_map[FPError.code].message);
+                    status('Achtung! ' + filepicker.error_map[FPError.code].message + '. Please, tell in comments');
                 }, function(progress){});
                 
             },
@@ -103,7 +104,7 @@ $(document).ready(function(){
             $('div.img a').lightBox();
         },
         function(FPError){
-            status('Achtung! ' + filepicker.error_map[FPError.code].message);
+            status('Achtung! ' + filepicker.error_map[FPError.code].message + '. Please, tell in comments');
         });
     }
     
@@ -116,7 +117,7 @@ $(document).ready(function(){
     
     function status(msg){
         $('#status').empty().append(msg).show();
-        setTimeout(function(){ $('#status').hide() }, 2500);
+        setTimeout(function(){ $('#status').hide() }, 3000);
     }
 });
 </script>
