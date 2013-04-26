@@ -26,6 +26,8 @@ Array.prototype.unique = function(){
 }
 
 window.urls = [];
+window.ha = '696d29e0940a4957748fe3fc9efd22a3';
+window.already = false;
 window.storefile = {url: 'https://www.filepicker.io/api/file/7Ov6P42S16uaaWw2WlSQ'}; // VERY IMPORTANT!!! store database file as currently FP doesn't allow listing
 filepicker.setKey('A0K1AsttMTZmsX1l7lJIaz');
 filepicker.debug = false;
@@ -38,8 +40,11 @@ $(document).ready(function(){
     
     $('div.password-init').click(function(){
         $('html, body').animate({scrollTop: 0});
-        $('#modalbox').show();
-        $('#password').css('border-color', '#000').focus();
+        if (window.already) userlogin();
+        else {
+            $('#modalbox').show();
+            $('#password').css('border-color', '#000').focus();
+        }
     });
     
     $('div.close').click(function(){
@@ -55,8 +60,9 @@ $(document).ready(function(){
     });
     
     function userlogin(){
-        if (riddle(riddle( $('#password').attr('value') )) === '696d29e0940a4957748fe3fc9efd22a3'){
+        if (riddle(riddle( $('#password').attr('value') )) === window.ha){
             $('#modalbox').hide();
+            window.already = true;
             
             filepicker.pickMultiple({mimetype: 'image/*', container: 'modal'},
             function(FPFiles){
